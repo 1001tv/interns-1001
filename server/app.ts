@@ -4,6 +4,7 @@ import session from "express-session";
 import sequelize from "./config/sequelize";
 import userRoutes from "./routes/user";
 import showRoutes from "./routes/show";
+import passport from "./config/passport";
 
 dotenv.config();
 
@@ -23,6 +24,9 @@ app.use(
     }
   })
 );
+
+app.use(passport.initialize());
+app.use(passport.authenticate("session"));
 
 app.use("/api/users", userRoutes);
 app.use("/api/shows", showRoutes);
