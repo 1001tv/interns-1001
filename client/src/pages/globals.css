@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fonts */
+.font-ar-600 {
+  font-family: "Readex Pro", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.font-ar-500 {
+  font-family: "Readex Pro", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.font-ar-400 {
+  font-family: "Readex Pro", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.inter-600 {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #000119;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #13cb5c;
+}
+
+/* Blur Effect */
+.blur-effect {
+  filter: blur(4px);
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
+/* Custom Radio Buttons */
+.subscription-options input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #555; /* Unselected border color */
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  margin-left: 10px;
+}
+
+.subscription-options input[type="radio"]:checked {
+  border: 6px solid #13cb5c; /* Green border when selected */
+}
+
+.subscription-options input[type="radio"]:checked::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #0d0e25;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+/* Background and Scrollbar */
+.home-section-bg {
+  background: rgb(5, 152, 63);
+  background: linear-gradient(
+    90deg,
+    rgba(5, 152, 63, 1) 0%,
+    rgba(2, 0, 36, 1) 50%,
+    rgba(2, 0, 36, 1) 100%
+  );
+}
+
+.scrollbar-hide {
+  scrollbar-width: none; /* For Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.bg-login {
+  background-image: url("/assets/login_bg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.bg-login::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("/assets/login_bg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: blur(8px);
+  z-index: -1;
+}
