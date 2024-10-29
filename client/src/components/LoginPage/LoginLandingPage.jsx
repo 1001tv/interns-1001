@@ -14,8 +14,8 @@ const LoginLandingPage = () => {
     router.push("/");
   }
 
-  const [username, setUsername] = useState(""); // Changed phoneNumber to username
-  const [password, setPassword] = useState(""); // State for password
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState(""); 
   const [showOtp, setShowOtp] = useState(false);
   const [error, setError] = useState("");
 
@@ -23,7 +23,7 @@ const LoginLandingPage = () => {
     e.preventDefault();
 
     try {
-      const userData = await loginUser(username, password); // Use username and password for login
+      const userData = await loginUser(username, password); 
       setUser(userData);
       router.push("/");
     } catch (error) {
@@ -47,19 +47,19 @@ const LoginLandingPage = () => {
             <input
               type="text"
               className="bg-transparent flex-1 p-2 text-white focus:outline-none"
-              placeholder="Username" // Updated placeholder
-              value={username} // Bind to username state
-              onChange={(e) => setUsername(e.target.value)} // Update username state
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 
           <div className="flex items-center border border-white rounded-lg overflow-hidden mb-6">
             <input
-              type="password" // Password input
+              type="password"
               className="bg-transparent flex-1 p-2 text-white focus:outline-none"
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)} // Update password state
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
@@ -67,7 +67,7 @@ const LoginLandingPage = () => {
 
           <button
             type="submit"
-            disabled={username.length === 0 || password.length === 0} // Disable if username or password is empty
+            disabled={username.length === 0 || password.length === 0}
             className="bg-transparent disabled:hover:bg-transparent disabled:hover:translate-y-0 disabled:text-gray-500 hover:bg-primary text-white text-lg sm:text-xl w-full p-3 rounded-md font-inter font-semibold border border-Green transition-all transform hover:-translate-y-1 hover:shadow-2xl"
           >
             Continue

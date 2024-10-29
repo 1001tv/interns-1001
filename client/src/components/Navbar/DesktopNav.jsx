@@ -17,7 +17,6 @@ const DesktopNav = ({
   const toggleUserDropdown = () => {
     setUserDropdownOpen((prev) => !prev)
   }
-  
   const handleLogout = () => {
     setUser()
   }

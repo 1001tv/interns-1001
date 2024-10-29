@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/User";
 
+
 export const logout = (req: Request, res: Response) => {
   req.logout((err) => {
     if (err) {
