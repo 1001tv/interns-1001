@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { FaUser } from "react-icons/fa"
+import { logoutUser } from "@/API/mainApi"
 
 const DesktopNav = ({
   items,
@@ -18,8 +19,14 @@ const DesktopNav = ({
     setUserDropdownOpen((prev) => !prev)
   }
   
-  const handleLogout = () => {
-    setUser()
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      setUser(null);
+      router.push("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   }
 
   return (

@@ -1,20 +1,18 @@
 import { Request, Response } from "express";
 import User from "../models/User";
 
-export const logout = (req: Request, res: Response) => {
-  req.logout((err) => {
-    if (err) {
-      return res.status(500).json({ error: "Logout failed" });
-    }
-    req.session.destroy((err) => {
+export const logout = async (req: Request, res: Response, next: any) => {
+  try {
+    req.logout(function (err) {
       if (err) {
-        return res.status(500).json({ error: "Failed to destroy session" });
+        return next(err);
       }
-      return res.status(200).json({ message: "Logged out successfully" });
+      res.status(200).json({ message: "Logged out successfully" });
     });
-  });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
 };
-
 
 export const isAuthenticated = (req: Request, res: Response, next: any) => {
   if (req.isAuthenticated()) {
