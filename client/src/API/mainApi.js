@@ -49,3 +49,4 @@ export async function logoutUser() {
   }
   
   return response.json();
+}
