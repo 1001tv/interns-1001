@@ -18,7 +18,6 @@ const DesktopNav = ({
   const toggleUserDropdown = () => {
     setUserDropdownOpen((prev) => !prev)
   }
-  
   const handleLogout = async () => {
     try {
       await logoutUser();

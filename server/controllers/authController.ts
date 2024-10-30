@@ -14,6 +14,7 @@ export const logout = async (req: Request, res: Response, next: any) => {
   }
 };
 
+
 export const isAuthenticated = (req: Request, res: Response, next: any) => {
   if (req.isAuthenticated()) {
     return next();

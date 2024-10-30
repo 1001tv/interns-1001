@@ -26,8 +26,6 @@ router.post("/login", (req, res, next) => {
   })(req, res, next);
 });
 
-
 router.post("/logout", AuthController.isAuthenticated, AuthController.logout as any);
-
 
 export default router;

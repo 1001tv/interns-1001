@@ -9,6 +9,7 @@ export async function getStaticProps() {
     console.error("Error fetching users:", error);
   }
 
+
   return {
     props: {
       users,
