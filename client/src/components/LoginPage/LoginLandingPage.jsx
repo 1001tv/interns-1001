@@ -1,66 +1,73 @@
-import React, { useContext, useState } from "react"
-import { FaFacebookF } from "react-icons/fa6"
-import { FaGooglePlusG, FaApple } from "react-icons/fa"
-import VerifyOtp from "./VerifyOtp"
-import { UserContext } from "../Context/UserContext"
-import { useRouter } from "next/router"
+import React, { useContext, useState } from "react";
+import { FaFacebookF } from "react-icons/fa6";
+import { FaGooglePlusG, FaApple } from "react-icons/fa";
+import VerifyOtp from "./VerifyOtp";
+import { UserContext } from "../Context/UserContext";
+import { useRouter } from "next/router";
+import { loginUser } from "@/API/mainApi";
 
-const LoginLandingPage = ({ users }) => {
-  const { user, setUser } = useContext(UserContext)
-  const router = useRouter()
+const LoginLandingPage = () => {
+  const { user, setUser } = useContext(UserContext);
+  const router = useRouter();
 
   if (user) {
-    router.push("/")
+    router.push("/");
   }
 
-  const [phoneNumber, setPhoneNumber] = useState("")
-  const [showOtp, setShowOtp] = useState(false)
-  const [loggedUser, setLoggedUser] = useState()
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState(""); 
+  const [showOtp, setShowOtp] = useState(false);
+  const [error, setError] = useState("");
 
-  const checkPhoneNumber = (e) => {
-    e.preventDefault()
-    let [user] = users.filter((i) => i.phoneNumber == phoneNumber)
-    if (user) {
-      setShowOtp(true)
-      setLoggedUser(user)
-    } else {
-      setLoggedUser({
-        id: Math.ceil(Math.random() * 100),
-        phoneNumber: phoneNumber,
-        required_package: 0,
-      })
-      setShowOtp(true)
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const userData = await loginUser(username, password); 
+      setUser(userData);
+      router.push("/");
+    } catch (error) {
+      setError("Login failed. Please check your credentials.");
     }
-  }
+  };
 
   return (
     <>
-      {showOtp && <VerifyOtp loggedUser={loggedUser} />}
+      {showOtp && <VerifyOtp />}
       <div className={`${showOtp ? "hidden" : ""}`}>
         <h2 className="font-inter text-white text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center">
           Login
         </h2>
 
         <p className="text-white font-inter font-normal text-base sm:text-lg mb-4 text-center">
-          Enter your phone number to receive the secret code
+          Enter your username and password to login
         </p>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="flex items-center border border-white rounded-lg overflow-hidden mb-6">
-            <span className="bg-white text-green-500 p-3 font-semibold text-lg">
-              +964
-            </span>
             <input
               type="text"
               className="bg-transparent flex-1 p-2 text-white focus:outline-none"
-              placeholder=""
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 
+          <div className="flex items-center border border-white rounded-lg overflow-hidden mb-6">
+            <input
+              type="password"
+              className="bg-transparent flex-1 p-2 text-white focus:outline-none"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          {error && <p className="text-red-500">{error}</p>}
+
           <button
-            onClick={checkPhoneNumber}
-            disabled={phoneNumber.length < 10}
+            type="submit"
+            disabled={username.length === 0 || password.length === 0}
             className="bg-transparent disabled:hover:bg-transparent disabled:hover:translate-y-0 disabled:text-gray-500 hover:bg-primary text-white text-lg sm:text-xl w-full p-3 rounded-md font-inter font-semibold border border-Green transition-all transform hover:-translate-y-1 hover:shadow-2xl"
           >
             Continue
@@ -83,7 +90,7 @@ const LoginLandingPage = ({ users }) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default LoginLandingPage
+export default LoginLandingPage;

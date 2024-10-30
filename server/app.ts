@@ -5,10 +5,18 @@ import sequelize from "./config/sequelize";
 import userRoutes from "./routes/user";
 import showRoutes from "./routes/show";
 import passport from "./config/passport";
+import cors from "cors";
 
 dotenv.config();
 
 const app: Application = express();
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

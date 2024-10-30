@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { FaUser } from "react-icons/fa"
+import { logoutUser } from "@/API/mainApi"
 
 const MobileNav = ({
   items,
@@ -24,8 +25,14 @@ const MobileNav = ({
     setIsUserDropdownOpen((prev) => !prev)
   }
 
-  const handleLogout = () => {
-    setUser()
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+      setUser(null);
+      router.push("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   }
 
   return (

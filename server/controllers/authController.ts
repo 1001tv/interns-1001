@@ -1,18 +1,19 @@
 import { Request, Response } from "express";
 import User from "../models/User";
 
-export const logout = async function (req: Request, res: Response, next: any) {
+export const logout = async (req: Request, res: Response, next: any) => {
   try {
     req.logout(function (err) {
       if (err) {
         return next(err);
       }
-      res.redirect("/");
+      res.status(200).json({ message: "Logged out successfully" });
     });
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
   }
 };
+
 
 export const isAuthenticated = (req: Request, res: Response, next: any) => {
   if (req.isAuthenticated()) {

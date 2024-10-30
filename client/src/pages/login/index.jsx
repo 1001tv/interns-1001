@@ -1,15 +1,21 @@
-import { getUsers } from "@/API/mainApi"
-import LoginLandingPage from "@/components/LoginPage/LoginLandingPage"
+import { getUsers } from "@/API/mainApi";
+import LoginLandingPage from "@/components/LoginPage/LoginLandingPage";
 
 export async function getStaticProps() {
-  const users = await getUsers()
+  let users = [];
+  try {
+    users = await getUsers();
+  } catch (error) {
+    console.error("Error fetching users:", error);
+  }
+
 
   return {
     props: {
       users,
     },
     revalidate: 3600,
-  }
+  };
 }
 
 const Index = ({ users }) => {
@@ -19,7 +25,7 @@ const Index = ({ users }) => {
         <LoginLandingPage users={users} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
